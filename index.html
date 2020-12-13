@@ -1,0 +1,205 @@
+<html>
+	<head>
+		<title>Calculadora</title>
+
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+    <style>
+      .calculadora {
+        margin-top: 10vw;
+        border: solid 1px #000;
+        padding: 20px;
+        background-color: #08812c;
+        border-radius: 10px;
+        box-shadow: 1px 1px 5px #000;
+        min-width: 170px;
+        min-height: 400px;
+      }
+
+      .btn {
+        width: 60px;
+        height: 50px;
+        margin: 5px;
+        box-shadow: 1px 1px 1px #000;
+      }
+
+      .clear {
+        width: 130px;
+      }
+
+      .enter {
+        height: 110px;
+      }
+
+      .zero {
+        width: 130px;
+      }
+
+      .resultado {
+        text-align: right;
+        font-size: 20px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        border: solid 1px #000;
+        box-shadow: 1px 1px 1px #000;
+      }
+      #message{
+        color: darkred;
+        border-bottom: darkred 1px solid;
+        display: inline;
+      }
+
+    </style>
+	</head>
+
+  <body style="background: #D9D9D9">
+
+    <div class="container">
+      <div class="row">
+        <div class="col d-flex justify-content-center">
+          <br />
+
+          <div class="calculadora">
+            <input id="resultado" type="text" class="form-control resultado" placeholder="0" disabled="disabled" />
+            
+            <div class="row">
+              <button onclick="myfunction('acao','c')" type="button" class="btn btn-dark btn-lg clear font-weight-light">C</button>
+              <button onclick="myfunction('acao','/')" type="button" class="btn btn-dark btn-lg font-weight-light">/</button>
+              <button onclick="myfunction('acao','*')" type="button" class="btn btn-dark btn-lg font-weight-light">x</button>
+            </div>
+
+            <div class="row">
+              <button onclick="myfunction('valor',7)" type="button" class="btn btn-dark btn-lg font-weight-light">7</button>
+              <button onclick="myfunction('valor',8)" type="button" class="btn btn-dark btn-lg font-weight-light">8</button>
+              <button onclick="myfunction('valor',9)" type="button" class="btn btn-dark btn-lg font-weight-light">9</button>
+              <button onclick="myfunction('acao','-')" type="button" class="btn btn-dark btn-lg font-weight-light">-</button>
+            </div>
+            
+            <div class="row">
+              <button onclick="myfunction('valor',4)" type="button" class="btn btn-dark btn-lg font-weight-light">4</button>
+              <button onclick="myfunction('valor',5)" type="button" class="btn btn-dark btn-lg font-weight-light">5</button>
+              <button onclick="myfunction('valor',6)" type="button" class="btn btn-dark btn-lg font-weight-light">6</button>
+              <button onclick="myfunction('acao','+')" type="button" class="btn btn-dark btn-lg font-weight-light">+</button>
+            </div>
+
+            <div class="row">
+              <button onclick="myfunction('valor',1)" type="button" class="btn btn-dark btn-lg font-weight-light">1</button>
+              <button onclick="myfunction('valor',2)" type="button" class="btn btn-dark btn-lg font-weight-light">2</button>
+              <button onclick="myfunction('valor',3)" type="button" class="btn btn-dark btn-lg font-weight-light">3</button>
+              <button onclick="myfunction('acao','=')" type="button" class="btn btn-dark btn-lg enter">=</button>
+            </div>
+
+            <div class="row" style="margin-top: -60px">
+              <button onclick="myfunction('valor',0)" type="button" class="btn btn-dark zero btn-lg font-weight-light">0</button>
+              <button onclick="myfunction('acao','.')"type="button" class="btn btn-dark btn-lg font-weight-light">.</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>    
+    <div id="message" ></div>
+    <script type="text/javascript">
+
+      let general = document.querySelector('body')
+      let pressNumber = general.addEventListener('keydown',function(event){
+        console.log(event.key)
+        numberPressed = event.key
+
+        switch (numberPressed) {
+          case '0':
+            myfunction('valor', 0)
+            break;
+          case '1':
+            myfunction('valor', 1)
+            break;
+          case '2':
+            myfunction('valor', 2)
+            break;
+          case '3':
+            myfunction('valor', 3)
+            break;
+          case '4':
+            myfunction('valor', 4)
+            break;
+          case '5':
+            myfunction('valor', 5)
+            break;
+          case '6':
+            myfunction('valor', 6)
+            break;
+          case '7':
+            myfunction('valor', 7)
+            break;
+          case '8':
+            myfunction('valor', 8)
+            break;
+          case '9':
+            myfunction('valor', 9)
+            break;
+          case '.':
+            myfunction('valor','.')
+            break;
+          case ',':
+            myfunction('valor','.')
+            break;
+          case '+':
+            myfunction('acao', '+')
+            break;
+          case '-':
+            myfunction('acao', '-')
+            break;
+          case '*':
+            myfunction('acao', '*')
+            break;
+          case '/':
+            myfunction('acao', '/')
+            break;
+          case 'Enter':
+            myfunction('acao', '=')
+            break;
+          case 'Backspace':
+            myfunction('acao', 'c')
+            break;
+          
+          default:
+            break;
+        }
+      })
+
+      function myfunction(tipo, digito){
+        if (tipo === 'valor') {
+          document.getElementById('resultado').value += digito
+
+        } else if (tipo === 'acao'){
+          if (digito ==='c') {
+             document.getElementById('resultado').value = ''
+          }else if (digito ==='+' ||  digito ==='-' ||  digito ==='*' || digito ==='/' || digito ==='.' ) {
+            document.getElementById('resultado').value += digito
+          }
+          else if (digito === '=') {
+            try {
+              var valor_campo = eval(document.getElementById('resultado').value)
+              document.getElementById('resultado').value = valor_campo
+            } catch (error) {
+              errorMessage()
+            }
+          }
+
+        }
+      }
+
+      function errorMessage(){
+        document.getElementById('resultado').value = 'Digite operações válidas.'
+      }
+
+    </script>
+
+
+
+
+
+  </body>	
+
+</html>
